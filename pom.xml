@@ -19,8 +19,6 @@
     <properties>
         <java.version>11</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <jacoco.version>0.8.7</jacoco.version>
-        <sonar.maven.plugin.version>3.9.1.2184</sonar.maven.plugin.version>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -83,12 +81,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.13</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>0.8.7</version> <!-- Version mise à jour -->
                 <executions>
                     <execution>
                         <goals>
@@ -107,7 +104,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar.maven.plugin.version}</version>
+                <version>3.9.1.2184</version>
             </plugin>
         </plugins>
     </build>
