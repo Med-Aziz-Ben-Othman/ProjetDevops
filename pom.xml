@@ -7,43 +7,87 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.13</version>
-        <relativePath/>
+        <relativePath/> <!-- Chemin relatif, si vous n'avez pas besoin, laissez-le vide -->
     </parent>
 
     <groupId>tn.esprit</groupId>
     <artifactId>DevOps_Project</artifactId>
-    <version>1.0.2</version> <!-- Updated version -->
+    <version>1.0.1</version> <!-- Version mise à jour -->
     <name>DevOps_Project</name>
-    <description>DevOps_Project</description>
+    <description>DevOps Project pour la gestion des tâches</description> <!-- Ajout d'une description plus explicite -->
 
     <properties>
-        <java.version>11</java.version>
-        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <java.version>11</java.version> <!-- Version Java utilisée -->
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version> <!-- Version du plugin JAR -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> <!-- Rapport de couverture Jacoco -->
     </properties>
 
     <dependencies>
-        <!-- Dependencies here -->
+        <!-- Spring Boot Starter pour JPA (Java Persistence API) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter pour la création d'applications web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Connecteur MySQL pour la base de données -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope> <!-- Utilisé uniquement au runtime -->
+        </dependency>
+
+        <!-- Lombok pour réduire la verbosité du code (getter/setter, etc.) -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Starter de test pour Spring Boot, utilisé pour les tests unitaires et d'intégration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SpringDoc OpenAPI pour générer une documentation Swagger pour les API -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+
+        <!-- Spring Boot Actuator pour la surveillance et la gestion de l'application -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
+        <!-- Dépôt pour le déploiement des artefacts -->
         <repository>
             <id>deploymentRepo</id>
-            <name>Nexus Releases</name>
-            <url>http://192.168.33.10:8081/repository/maven-releases/</url>
+            <name>Nexus Repository</name>
+            <url>http://192.168.33.10:8081/repository/maven-releases/</url> <!-- URL du Nexus Repository pour les releases -->
         </repository>
-        <snapshotRepository>
-            <id>snapshotRepo</id>
-            <url>http://192.168.33.10:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <build>
         <plugins>
+            <!-- Plugin pour construire et exécuter l'application Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Plugin Sonar pour l'analyse de la qualité du code avec SonarQube -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
