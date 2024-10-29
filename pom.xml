@@ -12,7 +12,7 @@
 
     <groupId>tn.esprit</groupId>
     <artifactId>DevOps_Project</artifactId>
-    <version>1.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>DevOps_Project</name>
     <description>DevOps_Project</description>
 
@@ -67,10 +67,13 @@
 
     <build>
         <plugins>
+            <!-- Plugin pour exécuter l'application Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Plugin Jacoco pour la couverture de test -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -90,6 +93,8 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Plugin SonarQube pour l'analyse de la qualité du code -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
