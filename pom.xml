@@ -12,7 +12,7 @@
 
     <groupId>tn.esprit</groupId>
     <artifactId>DevOps_Project</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version> <!-- Version mise à jour -->
     <name>DevOps_Project</name>
     <description>DevOps Project pour la gestion des tâches</description>
 
