@@ -71,9 +71,7 @@ class StockTest {
         when(stockRepository.findById(stock.getIdStock())).thenReturn(Optional.empty());
 
         // Act & Assert
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            stockService.retrieveStock(stock.getIdStock());
-        });
+        Exception exception = assertThrows(NullPointerException.class, () -> stockService.retrieveStock(stock.getIdStock()));
 
         assertEquals("Stock not found", exception.getMessage());
     }
@@ -81,9 +79,7 @@ class StockTest {
     @Test
     void retrieveStock_ShouldThrowException_WhenIdIsInvalid() {
         // Act & Assert
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            stockService.retrieveStock(null);
-        });
+        Exception exception = assertThrows(NullPointerException.class, () -> stockService.retrieveStock(null));
         assertEquals("Stock not found", exception.getMessage());
     }
 
