@@ -22,7 +22,7 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
-    image: asmafrikha/devops_projectt:1.0.0
+    image: asmafrikha/devops_project:1.0.0
     # build: ./
     restart: on-failure
     ports:
