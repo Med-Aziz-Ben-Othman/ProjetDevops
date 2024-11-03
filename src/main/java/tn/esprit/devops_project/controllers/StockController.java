@@ -10,9 +10,10 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
+
 public class StockController {
 
-    IStockService stockService;
+    private final IStockService stockService;
 
     @PostMapping("/stock")
     Stock addStock(@RequestBody Stock stock){
