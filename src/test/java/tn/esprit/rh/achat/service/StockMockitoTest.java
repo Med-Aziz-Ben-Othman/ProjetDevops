@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tn.esprit.devops_project.entities.Stock;
+import tn.esprit.devops_project.entities.StockDTO;
 import tn.esprit.devops_project.repositories.StockRepository;
 import tn.esprit.devops_project.services.StockServiceImpl;
 
@@ -25,12 +25,12 @@ class StockMockitoTest {
     @Mock
     private StockRepository stockRepository;
 
-    private Stock stock;
+    private StockDTO stock;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        stock = new Stock();
+        stock = new StockDTO();
         stock.setIdStock(1);
         stock.setTitle("Test Stock");
     }
@@ -38,10 +38,10 @@ class StockMockitoTest {
     @Test
     void addStock_ShouldReturnStock_WhenStockIsValid() {
         // Arrange
-        when(stockRepository.save(any(Stock.class))).thenReturn(stock);
+        when(stockRepository.save(any(StockDTO.class))).thenReturn(stock);
 
         // Act
-        Stock result = stockService.addStock(stock);
+        StockDTO result = stockService.addStock(stock);
 
         // Assert
         assertNotNull(result);
@@ -56,7 +56,7 @@ class StockMockitoTest {
         when(stockRepository.findById(stock.getIdStock())).thenReturn(Optional.of(stock));
 
         // Act
-        Stock result = stockService.retrieveStock(stock.getIdStock());
+        StockDTO result = stockService.retrieveStock(stock.getIdStock());
 
         // Assert
         assertNotNull(result);
@@ -70,9 +70,15 @@ class StockMockitoTest {
         when(stockRepository.findById(stock.getIdStock())).thenReturn(Optional.empty());
 
         // Act & Assert
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            stockService.retrieveStock(stock.getIdStock());
-        });
+        // Store the stock ID in a variable
+        Long stockId = stock.getIdStock(); // Ensure stockId is not null if that is part of the test case
+
+// Use assertThrows to check for NullPointerException when retrieving stock
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> stockService.retrieveStock(stockId));
+
+// Optionally, you can add additional assertions on the exception if needed
+        assertNotNull(exception);
+
 
         assertEquals("Stock not found", exception.getMessage());
     }
@@ -83,7 +89,7 @@ class StockMockitoTest {
         when(stockRepository.findAll()).thenReturn(List.of(stock));
 
         // Act
-        List<Stock> result = stockService.retrieveAllStock();
+        List<StockDTO> result = stockService.retrieveAllStock();
 
         // Assert
         assertNotNull(result);

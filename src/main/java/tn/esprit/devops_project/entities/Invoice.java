@@ -38,7 +38,7 @@ public class Invoice implements Serializable {
 	private Set<InvoiceDetail> invoiceDetails;
     @ManyToOne
     @JsonIgnore
-    Supplier supplier;
+    SupplierDTO supplier;
 
 	
 }

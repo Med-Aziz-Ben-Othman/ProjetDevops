@@ -3,9 +3,8 @@ package tn.esprit.devops_project.services;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.devops_project.entities.Operator;
+import tn.esprit.devops_project.entities.OperatorDTO;
 import tn.esprit.devops_project.repositories.OperatorRepository;
 import tn.esprit.devops_project.services.Iservices.IOperatorService;
 
@@ -18,12 +17,12 @@ public class OperatorServiceImpl implements IOperatorService {
 
 	OperatorRepository operatorRepository;
 	@Override
-	public List<Operator> retrieveAllOperators() {
-		return (List<Operator>) operatorRepository.findAll();
+	public List<OperatorDTO> retrieveAllOperators() {
+		return (List<OperatorDTO>) operatorRepository.findAll();
 	}
 
 	@Override
-	public Operator addOperator(Operator operator) {
+	public OperatorDTO addOperator(OperatorDTO operator) {
 		return operatorRepository.save(operator);
 	}
 
@@ -34,12 +33,12 @@ public class OperatorServiceImpl implements IOperatorService {
 	}
 
 	@Override
-	public Operator updateOperator(Operator operator) {
+	public OperatorDTO updateOperator(OperatorDTO operator) {
 		return operatorRepository.save(operator);
 	}
 
 	@Override
-	public Operator retrieveOperator(Long id) {
+	public OperatorDTO retrieveOperator(Long id) {
 		return operatorRepository.findById(id).orElseThrow(() -> new NullPointerException("Operator not found"));
 	}
 
