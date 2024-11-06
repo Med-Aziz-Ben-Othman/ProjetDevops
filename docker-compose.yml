@@ -21,7 +21,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   backend:
-    image: "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"  # Use dynamic image name and build number
+    image: chaima16/devops:latest  # Use the correct backend image name and tag
     container_name: backend-container
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
