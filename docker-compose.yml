@@ -1,41 +1,48 @@
-version: "3.8"
-
 services:
-  mysqldb:
+  mysql:
     image: mysql:8.0
-    restart: unless-stopped
+    container_name: mysql-container
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=devops
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devops
     ports:
       - "3306:3306"
-    volumes:
-      - db:/var/lib/mysql
+    networks:
+      - my-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "mysqladmin ping -h mysql || exit 1"]
       interval: 10s
+      timeout: 5s
       retries: 5
       start_period: 30s
-      timeout: 5s
+    volumes:
+      - mysql-data:/var/lib/mysql
 
-  app-timesheet:
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-    image: azizbo/devops:latest
-    # build: ./
-    restart: on-failure
+  backend:
+    image: azizbo/devops:latest  # Ensure this matches the exact image on Docker Hub
+    container_name: backend-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5Dialect
+      SERVER_PORT: 8089
+      MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: "true"
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: prometheus
     ports:
       - "8089:8089"
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/devops?createDatabaseIfNotExist=true",
-        "spring.datasource.username" : "root",
-        "spring.datasource.password" : "root",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
-    stdin_open: true
-    tty: true
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - my-network
+    restart: always
+
+networks:
+  my-network:
+    driver: bridge
 
 volumes:
-  db:
+  mysql-data:
