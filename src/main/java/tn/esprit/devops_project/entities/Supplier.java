@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SupplierDTO implements Serializable {
+public class Supplier implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class SupplierDTO implements Serializable {
 	SupplierCategory supplierCategory;
 	@OneToMany(mappedBy="supplier")
 	@JsonIgnore
-	private Set<Invoice> invoices;
+	private Set<InvoiceDTO> invoices;
     
 
 	

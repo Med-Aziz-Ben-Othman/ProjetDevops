@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductDTO implements Serializable {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idProduct;
@@ -24,5 +24,5 @@ public class ProductDTO implements Serializable {
     ProductCategory category;
     @ManyToOne
     @JsonIgnore
-    StockDTO stock;
+    Stock stock;
 }

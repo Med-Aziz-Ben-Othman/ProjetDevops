@@ -1,8 +1,8 @@
 package tn.esprit.devops_project.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import tn.esprit.devops_project.entities.SupplierDTO;
+import tn.esprit.devops_project.entities.Supplier;
 
-public interface SupplierRepository extends JpaRepository<SupplierDTO, Long> {
+public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
 }

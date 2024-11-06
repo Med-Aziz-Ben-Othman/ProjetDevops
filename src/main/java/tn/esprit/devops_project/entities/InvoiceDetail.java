@@ -25,9 +25,9 @@ public class InvoiceDetail implements Serializable {
 	int quantity;
 	float price;
 	@ManyToOne
-    ProductDTO product;
+	Product product;
 	@ManyToOne
 	@JsonIgnore
-	Invoice invoice;
+    InvoiceDTO invoice;
 
 }

@@ -3,9 +3,9 @@ package tn.esprit.devops_project.services;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import tn.esprit.devops_project.entities.Invoice;
-import tn.esprit.devops_project.entities.OperatorDTO;
-import tn.esprit.devops_project.entities.SupplierDTO;
+import tn.esprit.devops_project.entities.InvoiceDTO;
+import tn.esprit.devops_project.entities.Operator;
+import tn.esprit.devops_project.entities.Supplier;
 import tn.esprit.devops_project.repositories.InvoiceDetailRepository;
 import tn.esprit.devops_project.repositories.InvoiceRepository;
 import tn.esprit.devops_project.repositories.OperatorRepository;
@@ -26,13 +26,13 @@ public class InvoiceServiceImpl implements IInvoiceService {
 	final SupplierRepository supplierRepository;
 	
 	@Override
-	public List<Invoice> retrieveAllInvoices() {
+	public List<InvoiceDTO> retrieveAllInvoices() {
 		return invoiceRepository.findAll();
 	}
 	@Override
 	public void cancelInvoice(Long invoiceId) {
 		// method 01
-		Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(() -> new NullPointerException("Invoice not found"));
+		InvoiceDTO invoice = invoiceRepository.findById(invoiceId).orElseThrow(() -> new NullPointerException("Invoice not found"));
 		invoice.setArchived(true);
 		invoiceRepository.save(invoice);
 		//method 02 (Avec JPQL)
@@ -40,21 +40,21 @@ public class InvoiceServiceImpl implements IInvoiceService {
 	}
 
 	@Override
-	public Invoice retrieveInvoice(Long invoiceId) {
+	public InvoiceDTO retrieveInvoice(Long invoiceId) {
 
 		return invoiceRepository.findById(invoiceId).orElseThrow(() -> new NullPointerException("Invoice not found"));
 	}
 
 	@Override
-	public List<Invoice> getInvoicesBySupplier(Long idSupplier) {
-		SupplierDTO supplier = supplierRepository.findById(idSupplier).orElseThrow(() -> new NullPointerException("Supplier not found"));
-		return (List<Invoice>) supplier.getInvoices();
+	public List<InvoiceDTO> getInvoicesBySupplier(Long idSupplier) {
+		Supplier supplier = supplierRepository.findById(idSupplier).orElseThrow(() -> new NullPointerException("Supplier not found"));
+		return (List<InvoiceDTO>) supplier.getInvoices();
 	}
 
 	@Override
 	public void assignOperatorToInvoice(Long idOperator, Long idInvoice) {
-		Invoice invoice = invoiceRepository.findById(idInvoice).orElseThrow(() -> new NullPointerException("Invoice not found"));
-		OperatorDTO operator = operatorRepository.findById(idOperator).orElseThrow(() -> new NullPointerException("Operator not found"));
+		InvoiceDTO invoice = invoiceRepository.findById(idInvoice).orElseThrow(() -> new NullPointerException("Invoice not found"));
+		Operator operator = operatorRepository.findById(idOperator).orElseThrow(() -> new NullPointerException("Operator not found"));
 		operator.getInvoices().add(invoice);
 		operatorRepository.save(operator);
 	}

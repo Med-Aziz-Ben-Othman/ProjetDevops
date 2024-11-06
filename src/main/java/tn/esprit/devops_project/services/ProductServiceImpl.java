@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tn.esprit.devops_project.services.Iservices.IProductService;
-import tn.esprit.devops_project.entities.ProductDTO;
+import tn.esprit.devops_project.entities.Product;
 import tn.esprit.devops_project.entities.ProductCategory;
-import tn.esprit.devops_project.entities.StockDTO;
+import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.repositories.ProductRepository;
 import tn.esprit.devops_project.repositories.StockRepository;
 
@@ -21,24 +21,24 @@ public class ProductServiceImpl implements IProductService {
    final StockRepository stockRepository;
 
     @Override
-    public ProductDTO addProduct(ProductDTO product, Long idStock) {
-        StockDTO stock = stockRepository.findById(idStock).orElseThrow(() -> new NullPointerException("stock not found"));
+    public Product addProduct(Product product, Long idStock) {
+        Stock stock = stockRepository.findById(idStock).orElseThrow(() -> new NullPointerException("stock not found"));
         product.setStock(stock);
         return productRepository.save(product);
     }
 
     @Override
-    public ProductDTO retrieveProduct(Long id) {
+    public Product retrieveProduct(Long id) {
         return productRepository.findById(id).orElseThrow(() -> new NullPointerException("Product not found"));
     }
 
     @Override
-    public List<ProductDTO> retreiveAllProduct() {
+    public List<Product> retreiveAllProduct() {
         return productRepository.findAll();
     }
 
     @Override
-    public List<ProductDTO> retrieveProductByCategory(ProductCategory category) {
+    public List<Product> retrieveProductByCategory(ProductCategory category) {
         return productRepository.findByCategory(category);
     }
 
@@ -48,7 +48,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<ProductDTO> retreiveProductStock(Long id) {
+    public List<Product> retreiveProductStock(Long id) {
         return productRepository.findByStockIdStock(id);
     }
 }

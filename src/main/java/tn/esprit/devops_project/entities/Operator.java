@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OperatorDTO implements Serializable{
+public class Operator implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,6 +31,6 @@ public class OperatorDTO implements Serializable{
 	String password;
 	@OneToMany
 	@JsonIgnore
-	private Set<Invoice> invoices;
+	private Set<InvoiceDTO> invoices;
 	
 }

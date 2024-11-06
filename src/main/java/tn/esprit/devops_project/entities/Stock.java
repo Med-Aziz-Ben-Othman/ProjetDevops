@@ -13,11 +13,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StockDTO implements Serializable {
+public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idStock;
     String title;
     @OneToMany(mappedBy = "stock")
-    private Set<ProductDTO> products;
+    private Set<Product> products;
 }

@@ -3,7 +3,7 @@ package tn.esprit.devops_project.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.devops_project.entities.StockDTO;
+import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.services.Iservices.IStockService;
 import java.util.List;
 
@@ -16,17 +16,17 @@ public class StockController {
     private final IStockService stockService;
 
     @PostMapping("/stock")
-    StockDTO addStock(@RequestBody StockDTO stock){
+    Stock addStock(@RequestBody Stock stock){
         return stockService.addStock(stock);
     }
 
     @GetMapping("/stock/{id}")
-    StockDTO retrieveStock(@PathVariable Long id){
+    Stock retrieveStock(@PathVariable Long id){
         return stockService.retrieveStock(id);
     }
 
     @GetMapping("/stock")
-    List<StockDTO> retrieveAllStock(){
+    List<Stock> retrieveAllStock(){
         return stockService.retrieveAllStock();
     }
 

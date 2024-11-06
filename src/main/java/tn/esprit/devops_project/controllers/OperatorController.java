@@ -3,7 +3,7 @@ package tn.esprit.devops_project.controllers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.devops_project.entities.OperatorDTO;
+import tn.esprit.devops_project.entities.Operator;
 import tn.esprit.devops_project.services.Iservices.IOperatorService;
 
 import java.util.List;
@@ -17,17 +17,17 @@ public class OperatorController {
 	IOperatorService operatorService;
 	
 	@GetMapping("/operator")
-	public List<OperatorDTO> getOperators() {
+	public List<Operator> getOperators() {
 		return operatorService.retrieveAllOperators();
 	}
 
 	@GetMapping("/operator/{operatorId}")
-	public OperatorDTO retrieveoperator(@PathVariable Long operatorId) {
+	public Operator retrieveoperator(@PathVariable Long operatorId) {
 		return operatorService.retrieveOperator(operatorId);
 	}
 
 	@PostMapping("/operator")
-	public OperatorDTO addOperator(@RequestBody OperatorDTO operator) {
+	public Operator addOperator(@RequestBody Operator operator) {
 		return operatorService.addOperator(operator);
 	}
 
@@ -37,7 +37,7 @@ public class OperatorController {
 	}
 
 	@PutMapping("/operator")
-	public OperatorDTO modifyOperateur(@RequestBody OperatorDTO operator) {
+	public Operator modifyOperateur(@RequestBody Operator operator) {
 		return operatorService.updateOperator(operator);
 	}
 

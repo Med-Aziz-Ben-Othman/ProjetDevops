@@ -1,20 +1,20 @@
 package tn.esprit.devops_project.services.Iservices;
 
-import tn.esprit.devops_project.entities.OperatorDTO;
+import tn.esprit.devops_project.entities.Operator;
 
 import java.util.List;
 
 
 public interface IOperatorService {
 
-	List<OperatorDTO> retrieveAllOperators();
+	List<Operator> retrieveAllOperators();
 
-	OperatorDTO addOperator(OperatorDTO operator);
+	Operator addOperator(Operator operator);
 
 	void deleteOperator(Long id);
 
-	OperatorDTO updateOperator(OperatorDTO operator);
+	Operator updateOperator(Operator operator);
 
-	OperatorDTO retrieveOperator(Long id);
+	Operator retrieveOperator(Long id);
 
 }
