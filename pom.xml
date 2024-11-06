@@ -107,7 +107,7 @@
 
     <build>
         <plugins>
-            <plugin>
+           <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
     <version>0.8.8</version>
@@ -120,16 +120,22 @@
             </goals>
             <phase>test</phase>
         </execution>
-        <!-- Generate the report after tests are complete -->
+        <!-- Generate XML report after tests are complete -->
         <execution>
-            <id>default-report</id>
+            <id>report</id>
             <phase>verify</phase>
             <goals>
                 <goal>report</goal>
             </goals>
+            <configuration>
+                <reports>
+                    <report>xml</report> <!-- Only XML format needed for SonarQube -->
+                </reports>
+            </configuration>
         </execution>
     </executions>
 </plugin>
+
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
