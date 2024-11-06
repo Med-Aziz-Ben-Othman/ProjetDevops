@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tn.esprit.devops_project.entities.Stock;
+import tn.esprit.devops_project.entities.StockDTO;
 import tn.esprit.devops_project.repositories.StockRepository;
 import tn.esprit.devops_project.services.StockServiceImpl;
 
@@ -25,12 +25,12 @@ class StockTest {
     @Mock
     private StockRepository stockRepository;
 
-    private Stock stock;
+    private StockDTO stock;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        stock = new Stock();
+        stock = new StockDTO();
         stock.setIdStock(1);
         stock.setTitle("Test Stock");
     }
@@ -38,10 +38,10 @@ class StockTest {
     @Test
     void addStock_ShouldReturnStock_WhenStockIsValid() {
         // Arrange
-        when(stockRepository.save(any(Stock.class))).thenReturn(stock);
+        when(stockRepository.save(any(StockDTO.class))).thenReturn(stock);
 
         // Act
-        Stock result = stockService.addStock(stock);
+        StockDTO result = stockService.addStock(stock);
 
         // Assert
         assertNotNull(result);
@@ -57,7 +57,7 @@ class StockTest {
         when(stockRepository.findById(stock.getIdStock())).thenReturn(Optional.of(stock));
 
         // Act
-        Stock result = stockService.retrieveStock(stock.getIdStock());
+        StockDTO result = stockService.retrieveStock(stock.getIdStock());
 
         // Assert
         assertNotNull(result);
@@ -92,12 +92,12 @@ class StockTest {
     @Test
     void retrieveAllStock_ShouldReturnListOfStocks() {
         // Arrange
-        List<Stock> stockList = new ArrayList<>();
+        List<StockDTO> stockList = new ArrayList<>();
         stockList.add(stock);
         when(stockRepository.findAll()).thenReturn(stockList);
 
         // Act
-        List<Stock> result = stockService.retrieveAllStock();
+        List<StockDTO> result = stockService.retrieveAllStock();
 
         // Assert
         assertNotNull(result);
@@ -111,7 +111,7 @@ class StockTest {
         when(stockRepository.findAll()).thenReturn(new ArrayList<>());
 
         // Act
-        List<Stock> result = stockService.retrieveAllStock();
+        List<StockDTO> result = stockService.retrieveAllStock();
 
         // Assert
         assertNotNull(result);
@@ -121,16 +121,16 @@ class StockTest {
     @Test
     void retrieveAllStock_ShouldReturnMultipleStocks_WhenStocksExist() {
         // Arrange
-        Stock stock2 = new Stock();
+        StockDTO stock2 = new StockDTO();
         stock2.setIdStock(2);
         stock2.setTitle("Test Stock 2");
-        List<Stock> stockList = new ArrayList<>();
+        List<StockDTO> stockList = new ArrayList<>();
         stockList.add(stock);
         stockList.add(stock2);
         when(stockRepository.findAll()).thenReturn(stockList);
 
         // Act
-        List<Stock> result = stockService.retrieveAllStock();
+        List<StockDTO> result = stockService.retrieveAllStock();
 
         // Assert
         assertNotNull(result);

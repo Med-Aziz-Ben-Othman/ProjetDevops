@@ -1,19 +1,19 @@
 package tn.esprit.devops_project.services.Iservices;
 
-import tn.esprit.devops_project.entities.Supplier;
+import tn.esprit.devops_project.entities.SupplierDTO;
 
 import java.util.List;
 
 public interface ISupplierService {
 
-	List<Supplier> retrieveAllSuppliers();
+	List<SupplierDTO> retrieveAllSuppliers();
 
-	Supplier addSupplier(Supplier supplier);
+	SupplierDTO addSupplier(SupplierDTO supplier);
 
 	void deleteSupplier(Long id);
 
-	Supplier updateSupplier(Supplier supplier);
+	SupplierDTO updateSupplier(SupplierDTO supplier);
 
-	Supplier retrieveSupplier(Long id);
+	SupplierDTO retrieveSupplier(Long id);
 
 }

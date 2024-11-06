@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tn.esprit.devops_project.entities.InvoiceDTO;
-import tn.esprit.devops_project.entities.Operator;
-import tn.esprit.devops_project.entities.Supplier;
+import tn.esprit.devops_project.entities.OperatorDTO;
+import tn.esprit.devops_project.entities.SupplierDTO;
 import tn.esprit.devops_project.repositories.InvoiceDetailRepository;
 import tn.esprit.devops_project.repositories.InvoiceRepository;
 import tn.esprit.devops_project.repositories.OperatorRepository;
@@ -47,14 +47,14 @@ public class InvoiceServiceImpl implements IInvoiceService {
 
 	@Override
 	public List<InvoiceDTO> getInvoicesBySupplier(Long idSupplier) {
-		Supplier supplier = supplierRepository.findById(idSupplier).orElseThrow(() -> new NullPointerException("Supplier not found"));
+		SupplierDTO supplier = supplierRepository.findById(idSupplier).orElseThrow(() -> new NullPointerException("Supplier not found"));
 		return (List<InvoiceDTO>) supplier.getInvoices();
 	}
 
 	@Override
 	public void assignOperatorToInvoice(Long idOperator, Long idInvoice) {
 		InvoiceDTO invoice = invoiceRepository.findById(idInvoice).orElseThrow(() -> new NullPointerException("Invoice not found"));
-		Operator operator = operatorRepository.findById(idOperator).orElseThrow(() -> new NullPointerException("Operator not found"));
+		OperatorDTO operator = operatorRepository.findById(idOperator).orElseThrow(() -> new NullPointerException("Operator not found"));
 		operator.getInvoices().add(invoice);
 		operatorRepository.save(operator);
 	}

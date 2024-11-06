@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Operator implements Serializable{
+public class OperatorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
