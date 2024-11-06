@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8.0
@@ -21,7 +19,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   backend:
-    image: chaima16/devops:latest  # Use the correct backend image name and tag
+    image: chaima16/devops:latest  # Ensure this matches the exact image on Docker Hub
     container_name: backend-container
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
